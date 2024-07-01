@@ -1,7 +1,20 @@
 from django.shortcuts import render
-from django.views.generic import *
+from rest_framework import generics
 from .models import *
+from .serializers import *
 
-class TaskListView(ListView):
-    model=Task
-    template_name='home.html'
+class ListTodo(generics.ListAPIView):
+    queryset=Task.objects.all()
+    serializer_class=ToDoSerializer
+
+class CreateTodo(generics.CreateAPIView):
+    queryset=Task.objects.all()
+    serializer_class=ToDoSerializer
+
+class DetailTodo(generics.RetrieveUpdateAPIView):
+    queryset=Task.objects.all()
+    serializer_class=ToDoSerializer
+
+class DeleteTodo(generics.DestroyAPIView):
+    queryset=Task.objects.all()
+    serializer_class=ToDoSerializer
